@@ -58,9 +58,9 @@ public class JumiaOrderFlow {
     @Test
     public void loginTest() throws InterruptedException {
         //Input email address on the email field
-        driver.findElement(By.id("fi-email")).sendKeys("oyindamolaadedoyin2@gmail.com");
+        driver.findElement(By.id("fi-email")).sendKeys("");
         //Input your password on the username field
-        driver.findElement(By.id("fi-password")).sendKeys("pretty24");
+        driver.findElement(By.id("fi-password")).sendKeys("");
         // Click on the LOGIN Button
         driver.findElement(By.xpath("//*[@id=\"authForm\"]/button/span")).click();
         Thread.sleep(5000);
