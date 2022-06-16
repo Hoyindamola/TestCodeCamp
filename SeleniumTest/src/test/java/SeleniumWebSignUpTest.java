@@ -10,7 +10,7 @@ public class SeleniumWebSignUpTest {
     //import selenium WebDriver
     private WebDriver driver;
 
-    @Test
+    @BeforeTest
     public void setUp() throws InterruptedException {
         //locate where the chromedriver is
         System.setProperty("webdriver.chrome.driver", "resources/chromedriver");
@@ -34,11 +34,27 @@ public class SeleniumWebSignUpTest {
         driver.manage().window().maximize();
 
         //4. Click on Signup button to open the Signup page
-        driver.findElement(By.xpath("/html/body/div[2]/div/a[2]")).click();
-        Thread.sleep(5000);
 
+        driver.findElement(By.xpath("/html/body/div[2]/div/a[2]")).click();
+
+        //Test2. Verify that when user clicks on the signup button, the user is directed to the signup page
+        String expectedURL = "https://selenium-blog.herokuapp.com/signup";
+        String actualURL = driver.getCurrentUrl();
+
+        if (actualURL.contains(expectedURL))
+            System.out.println("Correct Webpage");
+        else
+            System.out.println("Wrong Webpage");
+        Thread.sleep(5000);
+        //Test2. Verify that when user clicks on the signup button, the user is directed to the signup page
+
+    }
+
+    @Test (priority = 0)
+    public void signup() throws InterruptedException {
         //5. Input your username on the username field
         driver.findElement(By.id("user_username")).sendKeys("ominda97");
+
 
         //6.Locate the email address field and Input an email address on the email field
         driver.findElement(By.id("user_email")).sendKeys("omin@qa.teamy");
@@ -49,18 +65,23 @@ public class SeleniumWebSignUpTest {
         //8. Click on the SignUp Button
         driver.findElement(By.id("submit")).click();
         Thread.sleep(5000);
+    }
 
+    @Test (priority = 1)
+    public void clickUser1Item() {
         //9. Click on User1 item on the listpage
         driver.findElement(By.xpath("/html/body/div[2]/div[1]/ul/div/div/li[1]/a")).click();
+    }
 
         //10. Search for an item (Using Learn XPath) and confirm it is present
         //driver.findElement(By.xpath("/html/body/div[2]/div[1]/div/div/div[1]/a")).click();
-
+    @Test (priority = 2)
+     public void logout() {
         //11. Click on Logout
         driver.findElement(By.xpath("//*[@id=\"bs-example-navbar-collapse-1\"]/ul/li[3]/a")).click();
-
-
     }
+
+
         @AfterTest
         public void closeBrowser(){
             //Quit the browser
